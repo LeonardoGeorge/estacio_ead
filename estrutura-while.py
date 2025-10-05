@@ -50,3 +50,13 @@ while opcao != 4:
 
     else:
         print("❌ Opção inválida, tente novamente.")
+
+
+
+
+
+
+
+
+
+

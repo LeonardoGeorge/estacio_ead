@@ -1,0 +1,36 @@
+Processo de desenvolvimento:
+
+
+Etapa 1: Um arquivo com código fonte é criado em nosso computador.
+
+Etapa 2: O arquivo é enviado para o servidor.
+
+Etapa 3: Um código é editado em nosso computador.
+
+Etapa 4: A modificação é enviada para o servidor.
+
+Etapa 5: O servidor compara com a versão armazenada e tenta unificar o código.
+
+Etapa 6: Caso o servidor não consiga unificar o código devido a algum conflito,
+o desenvolvedor recebe uma mensagem solicitando que ele mesmo faça essa junção.
+
+Etapa 7: Após resolver o conflito, o desenvolvedor envia novamente o arquivo para o servidor, 
+que passa a ser a última versão válida.
+
+Etapa 8: O código atualizado fica disponível para todos que têm acesso ao repositório.
+
+
+
+
+Dica:
+Durante o desenvolvimento de programas, 
+devemos constantemente testar nosso código, de forma a certificar que não existam erros.
+
+Os testes são tão importantes que existem metodologias de desenvolvimento baseadas em teste,
+como o Test Driven Development (TDD) ou Desenvolvimento Guiado por Testes.
+
+Nessa metodologia, as descrições dos testes são escritas antes mesmo do código,
+começando com o desenho e desenvolvimento dos testes para cada pequena funcionalidade do programa.
+
+O objetivo do TDD é fazer com que o código fique limpo, simples e livre de erros.
+
