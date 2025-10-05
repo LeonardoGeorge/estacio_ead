@@ -15,5 +15,5 @@ else:  # idade > 5
         print("Parabéns você vacinou seu filho")
     else:
         print("Vacine seu filho imediatamente")
-    print("Procure o posto de saúde mais proximo")
-    print("A Saúde vem em primeiro lugar")
+        print("Procure o posto de saúde mais proximo")
+        print("A Saúde vem em primeiro lugar")
