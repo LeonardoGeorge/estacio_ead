@@ -4,393 +4,67 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="stylesheet" href="style.css">
     <title>Dashboard - Busca de Clientes (XMLHttpRequest)</title>
-
-    <!-- CSS simples e profissional -->
-    <style>
-        :root {
-            --bg: #f3f1f8;
-            --card: #ffffff;
-            --primary: #6b46c1;
-            --muted: #6b7280;
-            --success: #10b981;
-            --danger: #ef4444;
-            --shadow: 0 6px 18px rgba(20, 20, 40, 0.07);
-            font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-        }
-
-        * {
-            box-sizing: border-box
-        }
-
-        body {
-            margin: 0;
-            background: linear-gradient(180deg, #f7f6fb 0%, var(--bg) 100%);
-            color: #111827;
-            padding: 32px;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-
-        header.app-header {
-            display: flex;
-            gap: 16px;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .brand {
-            display: flex;
-            gap: 12px;
-            align-items: center;
-        }
-
-        .logo {
-            width: 56px;
-            height: 56px;
-            background: linear-gradient(135deg, var(--primary), #9f7aea);
-            border-radius: 12px;
-            box-shadow: var(--shadow);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 700;
-            font-size: 18px;
-        }
-
-        h1 {
-            font-size: 20px;
-            margin: 0
-        }
-
-        p.lead {
-            margin: 0;
-            color: var(--muted);
-            font-size: 14px
-        }
-
-        .card {
-            background: var(--card);
-            border-radius: 12px;
-            padding: 18px;
-            box-shadow: var(--shadow);
-            margin-top: 18px;
-        }
-
-        .controls {
-            display: flex;
-            gap: 12px;
-            align-items: center;
-            margin-bottom: 12px;
-        }
-
-        button {
-            border: 0;
-            padding: 8px 12px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-        }
-
-        .btn-primary {
-            background: var(--primary);
-            color: white;
-        }
-
-        .btn-ghost {
-            background: transparent;
-            color: var(--primary);
-            border: 1px solid rgba(107, 70, 193, 0.12);
-        }
-
-        .status {
-            margin-left: auto;
-            color: var(--muted);
-            font-size: 14px;
-            display: flex;
-            gap: 8px;
-            align-items: center;
-        }
-
-        .spinner {
-            width: 14px;
-            height: 14px;
-            border-radius: 50%;
-            border: 2px solid rgba(0, 0, 0, 0.08);
-            border-top-color: var(--primary);
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            to {
-                transform: rotate(360deg)
-            }
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 8px;
-            font-size: 14px;
-        }
-
-        thead th {
-            text-align: left;
-            padding: 10px 8px;
-            color: var(--muted);
-            font-weight: 600;
-            font-size: 13px;
-            border-bottom: 1px solid #efeff5;
-        }
-
-        tbody td {
-            padding: 12px 8px;
-            border-bottom: 1px dashed #f1f1f6;
-        }
-
-        .muted {
-            color: var(--muted);
-            font-size: 13px
-        }
-
-        .error {
-            color: var(--danger);
-            font-weight: 700
-        }
-
-        .empty {
-            padding: 18px;
-            color: var(--muted);
-            text-align: center
-        }
-
-        footer.note {
-            margin-top: 12px;
-            color: var(--muted);
-            font-size: 13px
-        }
-
-        @media (max-width:720px) {
-            .controls {
-                flex-wrap: wrap
-            }
-
-            thead {
-                display: none
-            }
-
-            table,
-            tbody,
-            tr,
-            td {
-                display: block;
-                width: 100%
-            }
-
-            tr {
-                margin-bottom: 12px
-            }
-
-            td {
-                padding: 8px;
-                background: white;
-                border-radius: 8px
-            }
-
-            td::before {
-                content: attr(data-label);
-                display: block;
-                font-weight: 600;
-                margin-bottom: 6px;
-                color: var(--muted);
-            }
-        }
-    </style>
 </head>
 
 <body>
+    <!-- Container principal -->
     <div class="container">
+
+        <!-- Cabeçalho com logo e status -->
         <header class="app-header">
             <div class="brand">
+                <!-- Logotipo da empresa fictícia -->
                 <div class="logo">AC</div>
+
+                <!-- Título e subtítulo -->
                 <div>
                     <h1>ACME Sistemas — Dashboard</h1>
                     <p class="lead">Busca de clientes via chamada HTTP (XMLHttpRequest)</p>
                 </div>
             </div>
+
+            <!-- Indicador de status da aplicação -->
             <div class="status" aria-live="polite" id="status">
                 <span class="muted">Pronto</span>
             </div>
         </header>
 
+        <!-- Conteúdo principal -->
         <main class="card" role="main">
+
+            <!-- Área de botões de controle -->
             <div class="controls">
                 <button id="btnRefresh" class="btn-primary">Atualizar lista</button>
                 <button id="btnClear" class="btn-ghost">Limpar</button>
 
+                <!-- Mini indicador de carregamento -->
                 <div class="status" id="miniStatus" style="margin-left:auto">
                     <div id="miniSpinner" style="display:none" class="spinner" aria-hidden="true"></div>
-                    <div id="miniText" class="muted">Última atualização: <span id="lastUpdate">—</span></div>
+                    <div id="miniText" class="muted">
+                        Última atualização: <span id="lastUpdate">—</span>
+                    </div>
                 </div>
             </div>
 
+            <!-- Área onde os resultados (tabela ou mensagens) serão exibidos -->
             <div id="output">
-                <!-- tabela será inserida aqui -->
-                <div class="empty" id="emptyMessage">Clique em "Atualizar lista" para buscar clientes.</div>
+                <div class="empty" id="emptyMessage">
+                    Clique em "Atualizar lista" para buscar clientes.
+                </div>
             </div>
 
+            <!-- Rodapé com observação -->
             <footer class="note">
-                Exemplo técnico: usamos <code>XMLHttpRequest</code> para demonstrar o fluxo clássico de uma requisição
-                HTTP. (API de teste usada: jsonplaceholder.typicode.com)
+                Exemplo técnico: usamos <code>XMLHttpRequest</code> para demonstrar o fluxo clássico
+                de uma requisição HTTP. (API de teste: jsonplaceholder.typicode.com) | Leonardo George Dev.
             </footer>
         </main>
     </div>
 
-    <!-- JavaScript (explicado logo abaixo) -->
-    <script>
-        // --- Configuração inicial ---
-        const API_URL = 'https://jsonplaceholder.typicode.com/users'; // endpoint de teste (lista de usuários)
-        const btnRefresh = document.getElementById('btnRefresh');
-        const btnClear = document.getElementById('btnClear');
-        const output = document.getElementById('output');
-        const status = document.getElementById('status');
-        const miniSpinner = document.getElementById('miniSpinner');
-        const miniText = document.getElementById('miniText');
-        const lastUpdate = document.getElementById('lastUpdate');
-        const emptyMessage = document.getElementById('emptyMessage');
-
-        // Função que inicia a requisição: usa XMLHttpRequest (modelo mostrado na imagem)
-        function fetchClients() {
-            // atualização de UI: mostrar carregando
-            setStatus('Carregando clientes...', true);
-
-            // Criamos o objeto XMLHttpRequest
-            const xhttp = new XMLHttpRequest();
-
-            // Define o que acontece quando o estado da requisição muda
-            xhttp.onreadystatechange = function () {
-                // readyState 4 significa que a requisição foi concluída (response recebido)
-                // status 200 significa sucesso HTTP (OK)
-                if (this.readyState === 4) {
-                    // sempre esconder o loading independente do resultado
-                    setStatus('Pronto', false);
-
-                    if (this.status === 200) {
-                        try {
-                            // a resposta vem como texto (responseText) - parseamos para JSON
-                            const data = JSON.parse(this.responseText);
-                            renderTable(data); // renderiza a tabela na UI
-                            lastUpdate.textContent = new Date().toLocaleString();
-                        } catch (err) {
-                            // erro ao parsear JSON
-                            renderError('Resposta inválida do servidor (JSON inválido).');
-                            console.error('JSON parse error', err);
-                        }
-                    } else {
-                        // status diferente de 200 -> erro HTTP (404, 500, etc)
-                        renderError('Erro na requisição. Código: ' + this.status);
-                        console.error('HTTP error', this.status, this.statusText);
-                    }
-                }
-            };
-
-            // Tratamento para erros de rede (onerror) e timeout
-            xhttp.onerror = function () {
-                setStatus('Erro', false);
-                renderError('Falha na conexão (erro de rede).');
-            };
-
-            xhttp.ontimeout = function () {
-                setStatus('Erro', false);
-                renderError('Tempo de espera esgotado (timeout).');
-            };
-
-            // Abre a requisição: método GET, URL, true = assíncrono
-            xhttp.open('GET', API_URL, true);
-
-            // Define timeout em ms (opcional, bom em produção)
-            xhttp.timeout = 7000; // 7 segundos
-
-            // Envia a requisição
-            xhttp.send();
-        }
-
-        // --- Helpers de UI ---
-        function setStatus(text, loading) {
-            // status principal
-            status.innerHTML = loading ? '<div class="spinner" aria-hidden="true"></div><span style="margin-left:8px;color:var(--muted)">' + text + '</span>' : '<span class="muted">' + text + '</span>';
-            // mini status
-            miniSpinner.style.display = loading ? 'inline-block' : 'none';
-            miniText.style.opacity = loading ? '0.6' : '1';
-            if (!loading) {
-                // se parou de carregar, atualizar texto
-                miniText.textContent = 'Última atualização: ' + (lastUpdate.textContent || '—');
-            }
-        }
-
-        function renderTable(users) {
-            if (!Array.isArray(users) || users.length === 0) {
-                output.innerHTML = '<div class="empty">Nenhum cliente encontrado.</div>';
-                return;
-            }
-
-            // construir HTML da tabela
-            let html = '<table aria-describedby="Clientes list"><thead><tr><th>Nome</th><th>Email</th><th>Empresa</th><th>Telefone</th></tr></thead><tbody>';
-            users.forEach(u => {
-                // segurança mínima: transformar valores em string
-                const name = String(u.name || '');
-                const email = String(u.email || '');
-                const company = (u.company && u.company.name) ? String(u.company.name) : '';
-                const phone = String(u.phone || '');
-                html += `<tr>
-          <td data-label="Nome">${escapeHtml(name)}</td>
-          <td data-label="Email">${escapeHtml(email)}</td>
-          <td data-label="Empresa">${escapeHtml(company)}</td>
-          <td data-label="Telefone">${escapeHtml(phone)}</td>
-        </tr>`;
-            });
-            html += '</tbody></table>';
-            output.innerHTML = html;
-            emptyMessage.style.display = 'none';
-        }
-
-        function renderError(message) {
-            output.innerHTML = `<div class="error card" style="padding:12px;border-radius:8px">${escapeHtml(message)}</div>`;
-        }
-
-        function escapeHtml(s) {
-            return String(s)
-                .replace(/&/g, '&amp;')
-                .replace(/</g, '&lt;')
-                .replace(/>/g, '&gt;')
-                .replace(/"/g, '&quot;')
-                .replace(/'/g, '&#039;');
-        }
-
-        // Limpar a área de resultado
-        function clearOutput() {
-            output.innerHTML = '<div class="empty" id="emptyMessage">Clique em "Atualizar lista" para buscar clientes.</div>';
-            lastUpdate.textContent = '—';
-        }
-
-        // --- Eventos dos botões ---
-        btnRefresh.addEventListener('click', function () {
-            fetchClients();
-        });
-        btnClear.addEventListener('click', function () {
-            clearOutput();
-        });
-
-        // Carregar automaticamente na primeira visita (opcional)
-        // fetchClients();
-
-    </script>
+    <!-- Importa o script JavaScript externo -->
+    <script src="script.js"></script>
 </body>
 
 </html>

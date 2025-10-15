@@ -1,0 +1,216 @@
+/* ------------------------------
+   ESTILOS GERAIS
+---------------------------------*/
+
+/* Cores principais e fonte base */
+:root {
+    --bg: #f3f1f8;
+    --card: #ffffff;
+    --primary: #6b46c1;
+    --muted: #6b7280;
+    --success: #10b981;
+    --danger: #ef4444;
+    --shadow: 0 6px 18px rgba(20, 20, 40, 0.07);
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+/* Remove margens padrão e define o fundo */
+body {
+    margin: 0;
+    background: linear-gradient(180deg, #f7f6fb 0%, var(--bg) 100%);
+    color: #111827;
+    padding: 32px;
+}
+
+/* Centraliza o conteúdo e limita a largura */
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* ------------------------------
+   CABEÇALHO
+---------------------------------*/
+header.app-header {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/* Área de logo e texto */
+.brand {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+/* Logotipo simples (caixa roxa com iniciais AC) */
+.logo {
+    width: 56px;
+    height: 56px;
+    background: linear-gradient(135deg, var(--primary), #9f7aea);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 700;
+    font-size: 18px;
+}
+
+/* ------------------------------
+   CONTEÚDO PRINCIPAL
+---------------------------------*/
+.card {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 18px;
+    box-shadow: var(--shadow);
+    margin-top: 18px;
+}
+
+/* Área dos botões */
+.controls {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+/* Botões */
+button {
+    border: 0;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+/* Botão principal (roxo) */
+.btn-primary {
+    background: var(--primary);
+    color: white;
+}
+
+/* Botão secundário (transparente) */
+.btn-ghost {
+    background: transparent;
+    color: var(--primary);
+    border: 1px solid rgba(107, 70, 193, 0.12);
+}
+
+/* ------------------------------
+   STATUS / SPINNER
+---------------------------------*/
+.status {
+    margin-left: auto;
+    color: var(--muted);
+    font-size: 14px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+/* Animação de carregamento */
+.spinner {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 2px solid rgba(0, 0, 0, 0.08);
+    border-top-color: var(--primary);
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ------------------------------
+   TABELA DE RESULTADOS
+---------------------------------*/
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 8px;
+    font-size: 14px;
+}
+
+thead th {
+    text-align: left;
+    padding: 10px 8px;
+    color: var(--muted);
+    font-weight: 600;
+    border-bottom: 1px solid #efeff5;
+}
+
+tbody td {
+    padding: 12px 8px;
+    border-bottom: 1px dashed #f1f1f6;
+}
+
+/* Mensagens auxiliares */
+.muted {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.error {
+    color: var(--danger);
+    font-weight: 700;
+}
+
+.empty {
+    padding: 18px;
+    color: var(--muted);
+    text-align: center;
+}
+
+/* Rodapé da caixa */
+footer.note {
+    margin-top: 12px;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+/* ------------------------------
+   RESPONSIVIDADE
+---------------------------------*/
+@media (max-width: 720px) {
+    .controls {
+        flex-wrap: wrap;
+    }
+
+    thead {
+        display: none;
+    }
+
+    table,
+    tbody,
+    tr,
+    td {
+        display: block;
+        width: 100%;
+    }
+
+    tr {
+        margin-bottom: 12px;
+    }
+
+    td {
+        padding: 8px;
+        background: white;
+        border-radius: 8px;
+    }
+
+    td::before {
+        content: attr(data-label);
+        display: block;
+        font-weight: 600;
+        margin-bottom: 6px;
+        color: var(--muted);
+    }
+}
