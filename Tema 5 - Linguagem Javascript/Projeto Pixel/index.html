@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Pixel Manipulation</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: #fff;
+        }
+
+        h1 {
+            margin-top: 40px;
+        }
+
+        #canvas-container {
+            margin: 20px auto;
+            width: 500px;
+            height: 350px;
+            border: 2px solid #444;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #fff;
+        }
+
+        canvas {
+            cursor: crosshair;
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        /* CAIXA DE INFORMAÇÃO DO PIXEL */
+        #pixelInfo {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            justify-content: center;
+            margin-top: 25px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            padding: 10px;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+            border: 1px #CCC solid;
+        }
+
+        #pixelColorPreview {
+            width: 50px;
+            height: 50px;
+            border-radius: 6px;
+            border: 2px solid #000;
+        }
+
+        .rgb-inputs label {
+            font-size: 16px;
+            margin-right: 5px;
+            font-weight: bold;
+        }
+
+        .rgb-inputs input {
+            width: 50px;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 5px 15px;
+            margin: 5px;
+            cursor: pointer;
+        }
+
+        input[type="color"] {
+            width: 40px;
+            height: 30px;
+            border: none;
+            margin-left: 5px;
+        }
+
+    </style>
+
+
+</head>
+<body>
+    
+    <h1>Image Pixel Manipulation</h1>
+    
+    <input type="file" id="imageLoader" accept="image/*">
+    
+    <div id="canvas-container">
+        <canvas id="imageCanvas"></canvas>
+    </div>
+    
+    <div>
+        <button onclick="zoomIn()">Zoom In</button>
+        <button onclick="zoomOut()">Zoom Out</button>
+        Choose Pixel Color: <input type="color" id="pixelColor" value="#000000">
+    </div>
+    
+    <!-- CAIXA DE INFO DO PIXEL (alterada como no print) -->
+    <div id="pixelInfo">
+        <div id="pixelColorPreview"></div>
+    
+        <div class="rgb-inputs">
+            <label>R: <input type="number" id="rValue" min="0" max="255" readonly></label>
+            <label>G: <input type="number" id="gValue" min="0" max="255" readonly></label>
+            <label>B: <input type="number" id="bValue" min="0" max="255" readonly></label>
+        </div>
+    </div>
+
+
+    <script>
+        
+    </script>
+</body>
+</html>
