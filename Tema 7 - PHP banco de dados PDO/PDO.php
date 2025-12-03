@@ -8,7 +8,7 @@ define('PASSWORD', '');
 
 try {
     $dsn = new PDO("mysql:host=" . HOST . ";port=" . PORT . ";dbname=" . DBNAME, ";user=" . USER . ";password=" . PASSWORD); 
-} CATCH (pdoeXCEPTION $e) {
+} CATCH (PDOException $e) {
     echo 'A conexão falhou e retornou a seguinte mensagem de erro: ' .$e->getMessage();
 }
 ?>
